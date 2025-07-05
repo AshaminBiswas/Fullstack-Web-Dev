@@ -26,3 +26,17 @@ let iAmAbove18 = true;
 let mySisterAbove18 = false;
 
 console.log(iAmAbove18 || mySisterAbove18);
+
+/*
+ASSIGNMENT Operator
+the operation behind it 
+first ----  num1 = 10
+then--- num1 = num1 + 5
+result== 20
+
+(num1 += 5)
+*/
+
+let num1 = 10;
+num1 += 10;
+console.log(num1); // 20
