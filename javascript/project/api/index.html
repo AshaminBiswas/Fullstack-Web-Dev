@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weather API</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Weather App</h1>
+      <div class="input-container">
+        <input id="city-name" type="text" placeholder="Enter the city name" />
+        <button id="fetch">Get Weather</button>
+      </div>
+      <div id="weather-info">
+        <h2 class="city"></h2>
+        <p class="temperature"></p>
+        <p class="description"></p>
+      </div>
+      <p id="error" class="hidden">City not found Please Try again.</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
