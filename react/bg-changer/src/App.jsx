@@ -7,8 +7,10 @@ function App() {
   function changeColor(color) {
     setColor(color)
   }
+
+
   return (
-    <div className='w-full h-screen bg-amber-400 ' style={{ backgroundColor: color }}>
+    <div className='w-full h-screen bg-amber-400' style={{ backgroundColor: color }}>
       {/* <BackgroundChanger /> */}
 
       <div className=' fixed flex flex-wrap justify-center items-center bottom-12 px-2'>
