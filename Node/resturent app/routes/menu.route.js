@@ -39,4 +39,20 @@ routes.post("/menu", async (req, res) => {
   }
 });
 
+routes.delete("/menu/:id", async (req, res) => {
+  try {
+    const menuId = req.params.id;
+    const response = await menu.findByIdAndDelete(menuId);
+    if (!response) {
+      return res.status(404).json({ error: "Menu is Not Found" });
+    } else {
+      console.log("Menu Delete Successfully");
+      res.status(200).json({ message: "menu deleted" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 module.exports = routes;
