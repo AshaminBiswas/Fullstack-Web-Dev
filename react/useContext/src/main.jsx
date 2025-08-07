@@ -3,12 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 // import { CounterProvider } from './context/Counter.jsx'
-import { CartProvider } from './context/CartContext.jsx'
+import {TodoItemsContext} from "./context/TodoItems.jsx"
+let arr = [{name:"lolo", age:20}]
 createRoot(document.getElementById('root')).render(
-
-  <StrictMode>
-    <CartProvider>
+  
+    <TodoItemsContext.Provider value={arr}>
       <App />
-    </CartProvider>
-  </StrictMode>,
+    </TodoItemsContext.Provider>
+  
 )
