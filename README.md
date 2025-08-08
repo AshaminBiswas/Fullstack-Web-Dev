@@ -127,7 +127,79 @@ This is a test Listener
 
 ---
 
-# File Name 
-```bash
-node .\01_events.js
 
+# Node.js EventEmitter - Chat & Error Handling Example
+
+This project demonstrates how to implement custom event-driven architecture using Node.js `EventEmitter`. It includes:
+
+- A `Chat` class that emits and listens to messages.
+- Basic error handling using the `error` event.
+
+----
+
+# 🧠 Concepts Covered
+✅ Custom Class with EventEmitter
+- You can extend the EventEmitter class to create your own event-driven modules.
+- Useful for building systems like chat apps, notifications, real-time updates, etc.
+
+class Chat extends EventEmitter {
+    sendMessage(msg) {
+        this.emit("Message Received", msg);
+    }
+}
+
+
+# ⚠️ Error Handling with Events
+Node.js EventEmitter has a special error event. If no listener is attached to an emitted error, Node.js will throw and crash. Always listen for errors in production apps.
+
+eventEmitter.on("error", (error) => {
+    console.error("Error:", error.message);
+});
+
+
+# 🧪 Sample Output
+- Message sent :  Hello Ashamin
+- New Message :  Hello Ashamin
+- Error Occurred : Something went wrong
+
+---
+
+# Code
+
+const EventEmitter = require("events");
+
+// Event-driven architecture using a custom class
+class Chat extends EventEmitter {
+    sendMessage(msg) {
+        console.log("Message sent : ", msg);
+        this.emit("Message Received", msg);
+    }
+}
+
+const chat = new Chat();
+
+// Listener for "Message Received"
+chat.on("Message Received", (msg) => {
+    console.log("New Message : ", msg);
+});
+
+// Triggering the message (uncomment to run)
+// chat.sendMessage("Hello Ashamin");
+
+// Expected Output:
+// Message sent :  Hello Ashamin
+// New Message :  Hello Ashamin
+
+
+// Error Handling Example
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("error", (error) => {
+    console.error(`Error Occurred : ${error.message}`);
+});
+
+// Triggering an error event
+eventEmitter.emit("error", new Error("Something went wrong"));
+
+// Expected Output:
+// Error Occurred : Something went wrong
