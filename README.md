@@ -218,6 +218,8 @@ The `Buffer` class is used to handle binary data directly. It is part of Node.js
 ## Copyable Full Code
 <div style="position: relative;">
 <pre><code id="buffer-code">
+
+``` JavaScript
 const { Buffer } = require("buffer");
 
 // const buf = Buffer.alloc(4)
@@ -247,6 +249,7 @@ const buf6 = Buffer.from("Ashamin");
 const buf7 = Buffer.from(" Biswas");
 const merge = Buffer.concat([buf6, buf7]);
 console.log(merge.toString());
+```
 </code></pre>
 <button onclick="navigator.clipboard.writeText(document.getElementById('buffer-code').innerText)" style="position: absolute; top: 5px; right: 5px; padding: 5px 10px; background: #007acc; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy</button>
 </div>
