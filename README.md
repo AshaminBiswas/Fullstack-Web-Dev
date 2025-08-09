@@ -59,6 +59,7 @@ This project demonstrates how to use Node.js `EventEmitter` for handling custom 
 ---
 
 # 📁 Code Example
+``` JavaScript
 const EventEmitter = require("events");
 
 const eventEmitter = new EventEmitter();
@@ -98,7 +99,7 @@ eventEmitter.removeListener("test", myListener);
 
 // After removing the event, it won't trigger
 eventEmitter.emit("test");
-
+```
 ---
 
 # Output:
@@ -141,21 +142,21 @@ This project demonstrates how to implement custom event-driven architecture usin
 ✅ Custom Class with EventEmitter
 - You can extend the EventEmitter class to create your own event-driven modules.
 - Useful for building systems like chat apps, notifications, real-time updates, etc.
-
+``` JavaScript
 class Chat extends EventEmitter {
     sendMessage(msg) {
         this.emit("Message Received", msg);
     }
 }
-
+```
 
 # ⚠️ Error Handling with Events
 Node.js EventEmitter has a special error event. If no listener is attached to an emitted error, Node.js will throw and crash. Always listen for errors in production apps.
-
+``` JavaScript
 eventEmitter.on("error", (error) => {
     console.error("Error:", error.message);
 });
-
+```
 
 # 🧪 Sample Output
 - Message sent :  Hello Ashamin
@@ -165,7 +166,7 @@ eventEmitter.on("error", (error) => {
 ---
 
 # Code
-
+``` JavaScript
 const EventEmitter = require("events");
 
 // Event-driven architecture using a custom class
@@ -203,3 +204,127 @@ eventEmitter.emit("error", new Error("Something went wrong"));
 
 // Expected Output:
 // Error Occurred : Something went wrong
+
+```
+
+
+# Node.js Buffer Examples
+
+This document demonstrates various ways to create, manipulate, and work with **Buffers** in Node.js.  
+The `Buffer` class is used to handle binary data directly. It is part of Node.js's core modules and does not require additional installation.
+
+---
+
+## Copyable Full Code
+<div style="position: relative;">
+<pre><code id="buffer-code">
+const { Buffer } = require("buffer");
+
+// const buf = Buffer.alloc(4)
+// console.log(buf)
+
+const buf = Buffer.from("Ashamin Biswas");
+// console.log(buf)
+// console.log(buf.toString())
+
+const bufTwo = Buffer.allocUnsafe(4);
+// console.log(bufTwo);
+
+// allocate memory
+const bufThree = Buffer.alloc(4);
+// bufThree.write("Hey")
+// console.log(bufThree.toString());
+
+const buf4 = Buffer.from("Ashamin Biswas");
+// console.log(buf4.toString('utf-8', 0,7)) 
+
+// manipulate the buffer
+const buf5 = Buffer.from("Hello");
+buf5[0] = 0x4A;
+
+// concat the buffer
+const buf6 = Buffer.from("Ashamin");
+const buf7 = Buffer.from(" Biswas");
+const merge = Buffer.concat([buf6, buf7]);
+console.log(merge.toString());
+</code></pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('buffer-code').innerText)" style="position: absolute; top: 5px; right: 5px; padding: 5px 10px; background: #007acc; color: white; border: none; border-radius: 5px; cursor: pointer;">Copy</button>
+</div>
+
+---
+
+## 1. Import the Buffer Module
+```javascript
+const { Buffer } = require("buffer");
+```
+
+
+2. Creating Buffers
+Allocate a Buffer with ``Buffer.alloc(size)``
+
+- Creates a zero-filled buffer of the given size (in bytes).
+- Safer than `allocUnsafe` because it clears the old data.
+
+
+3. Create a Buffer from a String
+``` JavaScript
+const buf = Buffer.from("Ashamin Biswas");
+// console.log(buf);
+// console.log(buf.toString());
+```
+
+- Stores the string in binary form.
+- `.toString()` converts it back to human-readable text.
+
+
+4. Allocate an Uninitialized Buffer
+``` JavaScript
+const bufTwo = Buffer.allocUnsafe(4);
+// console.log(bufTwo);
+```
+- Faster than `alloc` because it skips initialization.
+- May contain old, sensitive data; always overwrite before using.
+
+
+5. Allocate and Write into a Buffer
+``` JavaScript
+const bufThree = Buffer.alloc(4);
+// bufThree.write("Hey");
+// console.log(bufThree.toString());
+```
+- Allocates 4 bytes and writes "Hey" into it.
+
+
+6. Partial Reading from Buffers
+``` JavaScript
+const buf4 = Buffer.from("Ashamin Biswas");
+// console.log(buf4.toString('utf-8', 0, 7));
+```
+- Reads only a portion of the buffer (from byte index `0` to `7`).
+
+
+7.  Manipulating Buffer Data
+``` JavaScript
+const buf5 = Buffer.from("Hello");
+buf5[0] = 0x4A; // Changes first byte to 'J'
+```
+- Directly modifies binary data at a specific index.
+
+
+8. Concatenating Buffers
+
+``` JavaScript
+const buf6 = Buffer.from("Ashamin");
+const buf7 = Buffer.from(" Biswas");
+const merge = Buffer.concat([buf6, buf7]);
+console.log(merge.toString());
+```
+- Joins multiple buffers into one.
+- Output: `Ashamin Biswas`
+
+# Summary
+- ```Buffer.alloc(size)``` → Safe, zero-filled memory.
+- ```Buffer.allocUnsafe(size)``` → Faster but uninitialized memory.
+- ```Buffer.from(data)``` → Create buffer from string, array, or another buffer.
+- ```Buffer.concat([...buffers])``` → Merge multiple buffers.
+- Direct indexing ```(buf[i])`` → Modify individual bytes.
