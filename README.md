@@ -331,3 +331,41 @@ console.log(merge.toString());
 - ```Buffer.from(data)``` → Create buffer from string, array, or another buffer.
 - ```Buffer.concat([...buffers])``` → Merge multiple buffers.
 - Direct indexing ```(buf[i])`` → Modify individual bytes.
+
+---
+
+# Node.js HTTP Server
+
+Today, I learned how to create a **basic HTTP server** in Node.js using the built-in `http` module.
+
+## 📚 What I Learned
+- How to import the `http` module in Node.js.
+- How to create a simple server using `http.createServer()`.
+- How to handle incoming requests and send responses.
+- How to set response headers and send plain text or JSON data.
+- How to listen on a specific port and start the server.
+
+## 💻 Code Example
+
+```javascript
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+    console.log("I got incoming request");
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end('Thanks for Visiting my Server');
+});
+
+server.listen(8000, () => {
+    console.log(`HTTP server running on port 8000`);
+});
+```
+
+
+# ⚙️ How It Works
+- `require("http")` – Imports the HTTP module.
+- `http.createServer()` – Creates the server and takes a callback `(req, res)` for handling requests.
+- `res.writeHead() ` – Sets the HTTP response status and headers.
+- `res.end()` – Sends the response body and ends the request.
+- `server.listen(8000)` – Starts the server on port 8000.
+
