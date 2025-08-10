@@ -369,3 +369,54 @@ server.listen(8000, () => {
 - `res.end()` – Sends the response body and ends the request.
 - `server.listen(8000)` – Starts the server on port 8000.
 
+---
+
+# Node.js HTTP Server with Basic Routing
+
+Today, I learned how to create an **HTTP server with routing** using Node.js's `http` core module.  
+I also practiced logging request times and sending different responses based on the URL path.
+
+## 📚 What I Learned
+- How to import the Node.js core HTTP module (`require("node:http")`).
+- How to log request timestamps using `Date.now()`.
+- How to implement **basic routing** with `switch (req.url)`.
+- How to send different responses for different URL paths (`/`, `/about`, `/contact`).
+- How to handle unknown routes with a **404-like message**.
+
+## 💻 Code Example
+
+```javascript
+const http = require("node:http");
+
+const server = http.createServer((req, res) => {
+    console.log(`Got a request at [${Date.now()}]`);
+
+    res.writeHead(200);
+
+    switch (req.url) {
+        case '/':
+            return res.end("You are In Home Page");
+        case '/about':
+            return res.end("You are In About Page");
+        case '/contact':
+            return res.end("You are In Contact Page");
+        default:
+            res.end('Not Found!');
+            break;
+    }
+});
+
+server.listen(8000, () => {
+    console.log(`Server is listening on Port no: 8000`);
+});
+```
+
+---
+
+# ⚙️ How It Works
+- `require("node:http")` – Loads the HTTP core module.
+- `http.createServer()` – Creates the server and handles incoming requests.
+- `Date.now()` – Logs the timestamp (milliseconds) of the request.
+ - `switch (req.url)` – Checks the request path and decides what to respond with.
+ - `res.writeHead(200)` – Sends a `200` OK status (in this code, even the default `"Not Found"` returns `200`, which can be improved later).
+ - `server.listen(8000)` – Starts the server on port 8000.
