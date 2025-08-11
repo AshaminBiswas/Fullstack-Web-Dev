@@ -420,3 +420,92 @@ server.listen(8000, () => {
  - `switch (req.url)` – Checks the request path and decides what to respond with.
  - `res.writeHead(200)` – Sends a `200` OK status (in this code, even the default `"Not Found"` returns `200`, which can be improved later).
  - `server.listen(8000)` – Starts the server on port 8000.
+
+
+ ---
+
+ # 📚 Express.js Basics
+
+
+## 📌 Topics Learned
+Today, I learned how to:
+1. **Set up an Express.js server** and listen on a specific port.
+2. Create **routes** to handle different HTTP requests.
+3. Use **HTTP methods** like `GET` and `POST`.
+4. Send **status codes** and responses to the client.
+
+---
+
+## 📝 Code Example
+
+```javascript
+const express = require("express");
+const app = express();
+const PORT = 3000;
+
+// Home page route
+app.get("/", (req, res) => {
+    res.status(200).send("This is Home Page");
+});
+
+// GET request for /tweet
+app.get("/tweet", (req, res) => {
+    res.status(200).send("This is tweet page");
+});
+
+// POST request for /tweet
+app.post("/tweet", (req, res) => {
+    res.status(201).end("Your tweet was created");
+});
+
+// Server listening
+app.listen(PORT, () => {
+    console.log(`App is listening on port no: ${PORT}`);
+});
+```
+
+---
+
+<h2>🛠 How to Run</h2>
+<ol>
+    <li>Install dependencies:
+        <pre><code>npm install express</code></pre>
+    </li>
+    <li>Save the code in a file, e.g., <code>server.js</code>.</li>
+    <li>Run the server:
+        <pre><code>node server.js</code></pre>
+    </li>
+    <li>Open your browser or use a tool like <strong>Postman</strong> to test the routes.</li>
+</ol>
+
+---
+
+<h2>🚀 Output</h2>
+<ul>
+    <li>GET <code>/</code> → "This is Home Page" with status <strong>200 OK</strong></li>
+    <li>GET <code>/tweet</code> → "This is tweet page" with status <strong>200 OK</strong></li>
+    <li>POST <code>/tweet</code> → "Your tweet was created" with status <strong>201 Created</strong></li>
+</ul>
+
+
+<h2>📖 What I Understood</h2>
+<ul>
+    <li><code>app.get()</code> is used to handle HTTP GET requests.</li>
+    <li><code>app.post()</code> is used to handle HTTP POST requests.</li>
+    <li><code>res.status()</code> sets the HTTP status code for the response.</li>
+    <li><code>res.send()</code> sends a string or data back to the client.</li>
+    <li><code>res.end()</code> ends the response process without sending extra data.</li>
+    <li><code>app.listen(PORT)</code> starts the server and listens for incoming requests.</li>
+</ul>
+
+
+<h2>🗒 Learning Notes</h2>
+<ul>
+    <li>Learned basic <strong>Express.js setup</strong> and routing.</li>
+    <li>Understood difference between <strong>GET</strong> and <strong>POST</strong> requests.</li>
+    <li>Practiced sending <strong>HTTP status codes</strong> with responses.</li>
+    <li>Gained confidence in <strong>running and testing a Node.js server</strong>.</li>
+</ul>
+
+---
+
