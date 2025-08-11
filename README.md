@@ -509,3 +509,164 @@ app.listen(PORT, () => {
 
 ---
 
+# Book Store API (Practice Project)
+
+Today, I built a **Book Store API** using **Express.js** to practice handling API requests, working with routes, and managing an in-memory data store.
+
+## 📚 What I Learned
+- How to set up an Express.js server.
+- How to use **built-in middleware** (`express.json()`) to parse JSON request bodies.
+- How to create **GET, POST, and DELETE** routes.
+- How to handle **URL parameters** and perform type validation.
+- How to send **custom response headers**.
+- How to perform **basic CRUD** operations on in-memory data.
+
+---
+## Project Code
+
+``` javascript
+const express = require("express");
+const app = express();
+const PORT = 8000;
+
+// 📦 In-memory database
+const books = [
+  { id: 1, title: "Book One", author: "Author One" },
+  { id: 2, title: "Book Two", author: "Author Two" },
+];
+
+// 🔌 Middleware to parse JSON bodies
+app.use(express.json());
+
+/* ===========================
+   📥 GET Requests
+=========================== */
+
+// ✅ Get all books
+app.get("/books", (req, res) => {
+  res.setHeader("x-AB", "Ashamin Biswas");
+  res.status(200).json(books);
+});
+
+// ✅ Get a single book by ID
+app.get("/books/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id))
+    return res.status(400).json({ error: "The Parameter Only Accept Integer Value" });
+
+  const book = books.find((item) => item.id === id);
+  if (!book)
+    return res.status(404).send(`Book Is Not Found In the DataBase ${id}`);
+
+  res.json(book);
+});
+
+/* ===========================
+   ➕ POST Requests
+=========================== */
+
+// ✅ Create a new book
+app.post("/books", (req, res) => {
+  const { title, author } = req.body;
+
+  if (!title || title === "")
+    return res.status(400).json({ error: "title is required" });
+  if (!author || author === "")
+    return res.status(400).json({ error: "author is required" });
+
+  const id = books.length + 1;
+  const book = { id, title, author };
+  books.push(book);
+
+  res.status(201).json({ message: "Book Created Successfully", id });
+});
+
+/* ===========================
+   ❌ DELETE Requests
+=========================== */
+
+// ✅ Delete a book by ID
+app.delete("/books/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id))
+    return res.status(400).json({ error: "The id is Not Valid" });
+
+  const index = books.findIndex((item) => item.id === id);
+  if (index <= -1)
+    return res.status(404).json({ error: "Not Found" });
+
+  books.splice(index, 1);
+  res.status(200).json({ message: "Book Deleted" });
+});
+
+/* ===========================
+   🚀 Start the Server
+=========================== */
+app.listen(PORT, () => {
+  console.log(`App is listening on : ${PORT}`);
+});
+```
+
+---
+
+# Book Store API — Quick Guide (HTML version)
+
+<!-- The content below is written in HTML so it will render when this Markdown file is viewed. -->
+
+<section>
+  <h2>⚙️ How It Works</h2>
+
+  <ol>
+    <li>
+      <h3>1️⃣ In-Memory Database</h3>
+      <p>A simple array <code>books</code> stores book objects with <code>id</code>, <code>title</code>, and <code>author</code>.</p>
+    </li>
+
+
+<li>
+  <h3>2️⃣ Middleware</h3>
+  <p><code>express.json()</code> parses incoming JSON request bodies.</p>
+</li>
+
+<li>
+  <h3>3️⃣ Routes</h3>
+  <ul>
+    <li><strong>GET <code>/books</code></strong> → Returns all books (sets a custom header <code>x-AB</code>).</li>
+    <li><strong>GET <code>/books/:id</code></strong> → Returns a specific book by ID (with validation).</li>
+    <li><strong>POST <code>/books</code></strong> → Adds a new book to the list (with validation).</li>
+    <li><strong>DELETE <code>/books/:id</code></strong> → Deletes a book by ID.</li>
+  </ul>
+</li>
+
+<li>
+  <h3>4️⃣ Validation</h3>
+  <ul>
+    <li>Ensures <code>id</code> is an integer when coming from URL params.</li>
+    <li>Checks that <code>title</code> and <code>author</code> are provided in POST requests.</li>
+    <li>Handles <code>404 Not Found</code> when the requested resource doesn’t exist.</li>
+  </ul>
+</li>
+  </ol>
+</section>
+
+<section>
+  <h2>🚀 How to Run</h2>
+
+  <h3>Install dependencies</h3>
+  <pre><code>npm install express</code></pre>
+
+  <h3>Save the file as</h3>
+  <pre><code>index.js</code></pre>
+
+  <h3>Start the server</h3>
+  <pre><code>node index.js</code></pre>
+
+  <h3>Test API endpoints using</h3>
+  <ul>
+    <li>Browser (GET requests)</li>
+    <li>Postman / Thunder Client (POST and DELETE requests)</li>
+  </ul>
+</section>
+
+
+
