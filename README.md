@@ -669,4 +669,56 @@ app.listen(PORT, () => {
 </section>
 
 
+---
+
+
+# Node.js Exports — Named & Default
+
+This project demonstrates **named exports** and **default exports** in Node.js using the CommonJS `require` syntax.
+
+---
+
+## 📂 Files
+
+### **math.js**
+```javascript
+// Named exports
+exports.addFunk = (a, b) => a + b;
+exports.subFunk = (a, b) => a - b;
+exports.divFunk = (a, b) => a / b;
+exports.mulFunk = (a, b) => a * b;
+
+// Default export
+module.exports.defaultExportFun = function (params) {
+    console.log("I am:", params);
+};
+
+#=== import in index.js ===#
+
+// Destructuring named exports
+const { addFunk, subFunk, divFunk, mulFunk, defaultExportFun } = require("./math");
+
+console.log(addFunk(2, 8));  // Output: 10
+console.log(subFunk(8, 3));  // Output: 5
+console.log(divFunk(10, 2)); // Output: 5
+console.log(mulFunk(4, 5));  // Output: 20
+
+// Using the default export
+defaultExportFun("Ashamin");
+// Output: I am: Ashamin
+```
+
+---
+
+# Important Notes
+- In CommonJS, `module.exports` overrides `exports` if assigned directly.
+- If you want to export both named and default values, attach them to the same `module.exports` object instead of overwriting it.
+- Named exports can be destructured when importing.
+- The so-called default export in CommonJS is just another property (often called `default` or a custom name).
+
+
+
+---
+
+
 
